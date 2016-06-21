@@ -81,12 +81,12 @@ class Mysql():
 			uvalues = []
 			keys = ''
 			for k,v in self.updaters.iteritems():
-				updater += '{key}=%s '.format(key = k)
+				updater += '{key}=%s, '.format(key = k)
 				uvalues.append(v)
 			for k,v in self._where.iteritems():
 				keys += '{key}=%s '.format(key = k)
 				self.values.append(v)
-			self.statement = statement.format(table=config['userTableName'], updaters=updater, keys=keys)
+			self.statement = statement.format(table=config['userTableName'], updaters=updater[:-2], keys=keys)
 			self.values = tuple(uvalues + self.values)
 		elif self.definer == _INSERT:
 			statement = statements[_INSERT]
